@@ -1,13 +1,15 @@
 const { google } = require('googleapis');
 const keys = require('./keys.json');
-
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080
 
 const client = new google.auth.JWT(
     keys.client_email, null, keys.private_key,
     ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 );
-
+app.listen(port, () => { console.log('We are live on ' + port); });
 
 client.authorize(function (err) {
     if (err) {
